@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Dashboard from "./views/Dashboard";
+import Jobs from "./views/Jobs";
+import CutList from "./views/CutList";
+import Options from "./views/Options";
+import About from "./views/About";
+import "./App.css";
+import NavBar from "./components/NavBar/NavBar";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+          <NavBar />
+          <div className="container">
+            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/jobs" component={Jobs} />
+            <Route exact path="/cutlist" component={CutList} />
+            <Route exact path="/options" component={Options} />
+            <Route exact path="/about" component={About} />
+          </div>
+        </div>
+      </Router>
     );
   }
 }
