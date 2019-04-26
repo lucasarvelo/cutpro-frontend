@@ -8,13 +8,29 @@ class JobsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      jobNumber: 0,
-      clientNumber: 0,
+      jobNumber: "",
+      clientNumber: "",
       clientName: "",
-      formChecked: false
+      formCheck: false,
+      windows: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const target = event.target;
+    const id = target.id;
+    let value;
+    if (target.type === "checkbox") {
+      value = target.checked;
+    } else if (id === "clientNumber" || id === "jobNumber") {
+      value = Number(target.value);
+    } else {
+      value = target.value;
+    }
+    this.setState({ [id]: value });
   }
 
   handleSubmit(event) {
@@ -28,26 +44,21 @@ class JobsForm extends Component {
         <div className="form-group">
           <label htmlFor="jobNumber">Job Number</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="jobNumber"
-            placeholder="123456"
-            onChange={event => {
-              this.setState({ jobNumber: Number(event.target.value) });
-            }}
+            value={this.state.jobNumber}
+            onChange={this.handleChange}
             required
           />
         </div>
         <div className="form-group">
           <label htmlFor="clientNumber">Client Number</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="clientNumber"
-            placeholder="123456"
-            onChange={event => {
-              this.setState({ clientNumber: Number(event.target.value) });
-            }}
+            onChange={this.handleChange}
           />
         </div>
         <div className="form-group">
@@ -56,10 +67,7 @@ class JobsForm extends Component {
             type="text"
             className="form-control"
             id="clientName"
-            placeholder="Name"
-            onChange={event => {
-              this.setState({ clientName: event.target.value });
-            }}
+            onChange={this.handleChange}
             required
           />
         </div>
@@ -69,9 +77,7 @@ class JobsForm extends Component {
               className="form-check-input"
               type="checkbox"
               id="formCheck"
-              onChange={event => {
-                this.setState({ formChecked: event.target.checked });
-              }}
+              onChange={this.handleChange}
               required
             />
             <label className="form-check-label" htmlFor="formCheck">
