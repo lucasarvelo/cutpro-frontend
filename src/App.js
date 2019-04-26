@@ -5,6 +5,7 @@ import Jobs from "./views/Jobs";
 import CutList from "./views/CutList";
 import Options from "./views/Options";
 import About from "./views/About";
+import JobEdit from "./views/JobEdit";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 
@@ -20,6 +21,7 @@ class App extends Component {
             <Route exact path="/cutlist" component={CutList} />
             <Route exact path="/options" component={Options} />
             <Route exact path="/about" component={About} />
+            <Route path="/jobs/:id" component={JobEdit} />
           </div>
         </div>
       </Router>
