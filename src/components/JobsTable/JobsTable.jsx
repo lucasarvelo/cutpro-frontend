@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { deleteJob } from "../../actions/jobsActions";
+import { withRouter } from "react-router-dom";
 
-const mapStateToProps = state => {
-  return state.jobsReducer;
-};
 class JobsTable extends Component {
   render() {
     return (
@@ -28,10 +27,20 @@ class JobsTable extends Component {
                 <td className="align-middle">{job.clientNumber}</td>
                 <td className="align-middle">{job.clientName}</td>
                 <td className="align-middle">
-                  <button className="btn btn-outline-primary btn-sm m-1">
+                  <button
+                    className="btn btn-outline-primary btn-sm m-1"
+                    onClick={() => {
+                      this.props.history.push("/jobs/" + job.jobNumber);
+                    }}
+                  >
                     Edit
                   </button>
-                  <button className="btn btn-outline-danger btn-sm m-1">
+                  <button
+                    className="btn btn-outline-danger btn-sm m-1"
+                    onClick={() => {
+                      this.props.deleteJob(job);
+                    }}
+                  >
                     Delete
                   </button>
                 </td>
@@ -44,4 +53,15 @@ class JobsTable extends Component {
   }
 }
 
-export default connect(mapStateToProps)(JobsTable);
+const mapStateToProps = state => {
+  return state.jobsReducer;
+};
+
+const mapDispatchToProps = { deleteJob };
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(JobsTable)
+);
