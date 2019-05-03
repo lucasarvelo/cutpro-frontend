@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 class JobsTable extends Component {
   render() {
     return (
-      <table className="table table-sm table-hover">
+      <table className="table table-striped table-sm table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
