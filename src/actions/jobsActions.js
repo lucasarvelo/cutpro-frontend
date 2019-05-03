@@ -12,9 +12,9 @@ export const updateJob = job => dispatch => {
   });
 };
 
-export const removeJob = job => dispatch => {
+export const deleteJob = job => dispatch => {
   dispatch({
-    type: "REMOVE_JOB",
+    type: "DELETE_JOB",
     payload: job
   });
 };
@@ -32,3 +32,30 @@ export const fetchJobsFailure = error => ({
   type: "FETCH_JOBS_FAILURE",
   payload: error
 });
+
+export const addWindow = (jobNumber, window) => ({
+  type: "ADD_WINDOW",
+  payload: { jobNumber: jobNumber, window: window }
+});
+
+export const deleteWindow = (jobNumber, windowIndex) => dispatch => {
+  dispatch({
+    type: "DELETE_WINDOW",
+    payload: { jobNumber: jobNumber, windowIndex: windowIndex }
+  });
+};
+
+export const updateWindow = state => dispatch => {
+  dispatch({
+    type: "UPDATE_WINDOW",
+    payload: {
+      jobNumber: state.jobNumber,
+      windowIndex: state.index,
+      window: {
+        width: state.width,
+        height: state.height,
+        quantity: state.quantity
+      }
+    }
+  });
+};

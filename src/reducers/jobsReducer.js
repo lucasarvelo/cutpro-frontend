@@ -47,30 +47,28 @@ const initialState = {
   error: null
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
+export default (state = initialState, { type, payload }) => {
+  switch (type) {
     case "UPDATE_JOB":
       return {
         ...state,
         jobs: state.jobs
-          .filter(job => job.jobNumber !== action.payload.id)
-          .push(action.payload)
+          .filter(job => job.jobNumber !== payload.id)
+          .push(payload)
       };
     case "ADD_JOB":
-      return { ...state, jobs: [...state.jobs, action.payload] };
+      return { ...state, jobs: [...state.jobs, payload] };
     case "DELETE_JOB":
       return {
         ...state,
-        jobs: state.jobs.filter(
-          job => job.jobNumber !== action.payload.jobNumber
-        )
+        jobs: state.jobs.filter(job => job.jobNumber !== payload.jobNumber)
       };
     case "ADD_WINDOW":
       return {
         ...state,
         jobs: state.jobs.map(job => {
-          if (job.jobNumber === action.payload.jobNumber) {
-            return { ...job, windows: [...job.windows, action.payload.window] };
+          if (job.jobNumber === payload.jobNumber) {
+            return { ...job, windows: [...job.windows, payload.window] };
           }
           return job;
         })
@@ -79,12 +77,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         jobs: state.jobs.map(job => {
-          if (job.jobNumber === action.payload.jobNumber) {
+          if (job.jobNumber === payload.jobNumber) {
             return {
               ...job,
               windows: job.windows.map((window, index) => {
-                if (index === action.payload.windowIndex) {
-                  return action.payload.window;
+                if (index === payload.windowIndex) {
+                  return payload.window;
                 }
                 return window;
               })
@@ -98,23 +96,23 @@ export default (state = initialState, action) => {
       return {
         ...state,
         jobs: state.jobs.map(job => {
-          if (job.jobNumber === action.payload.jobNumber) {
+          if (job.jobNumber === payload.jobNumber) {
             return {
               ...job,
               windows: job.windows.filter(
-                (window, index) => index !== action.payload.windowIndex
+                (window, index) => index !== payload.windowIndex
               )
             };
           }
-          return job;
+          return { ...job };
         })
       };
     case "FETCH_JOBS_BEGIN":
       return { ...state, loading: true };
     case "FETCH_JOBS_SUCCESS":
-      return { ...state, loading: false, jobs: action.payload };
+      return { ...state, loading: false, jobs: payload };
     case "FECH_JOBS_FAILURE":
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false, error: payload };
     default:
       return state;
   }
