@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { addJob } from "../../actions/jobsActions";
-
-const mapDispatchToProps = { addJob };
 
 class JobsForm extends Component {
   constructor(props) {
@@ -14,12 +13,9 @@ class JobsForm extends Component {
       formCheck: false,
       windows: []
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
+  handleOnChange = event => {
     const target = event.target;
     const id = target.id;
     let value;
@@ -31,12 +27,23 @@ class JobsForm extends Component {
       value = target.value;
     }
     this.setState({ [id]: value });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
-    this.props.addJob(this.state);
-  }
+    const jobNumber = this.state.jobNumber;
+
+    if (this.props.jobs.find(job => job.jobNumber === jobNumber)) {
+      alert(
+        "Job Number " +
+          jobNumber +
+          " is already created!\r\nUse a diferent job number or update the existing job"
+      );
+    } else {
+      this.props.addJob(this.state);
+      this.props.history.push("/jobs/" + this.state.jobNumber);
+    }
+  };
 
   render() {
     return (
@@ -48,7 +55,7 @@ class JobsForm extends Component {
             className="form-control"
             id="jobNumber"
             value={this.state.jobNumber}
-            onChange={this.handleChange}
+            onChange={this.handleOnChange}
             required
           />
         </div>
@@ -58,7 +65,8 @@ class JobsForm extends Component {
             type="number"
             className="form-control"
             id="clientNumber"
-            onChange={this.handleChange}
+            value={this.state.clientNumber}
+            onChange={this.handleOnChange}
           />
         </div>
         <div className="form-group">
@@ -67,7 +75,8 @@ class JobsForm extends Component {
             type="text"
             className="form-control"
             id="clientName"
-            onChange={this.handleChange}
+            value={this.state.clientName}
+            onChange={this.handleOnChange}
             required
           />
         </div>
@@ -77,7 +86,7 @@ class JobsForm extends Component {
               className="form-check-input"
               type="checkbox"
               id="formCheck"
-              onChange={this.handleChange}
+              onChange={this.handleOnChange}
               required
             />
             <label className="form-check-label" htmlFor="formCheck">
@@ -93,7 +102,14 @@ class JobsForm extends Component {
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(JobsForm);
+const mapStateToProps = state => {
+  return { jobs: state.jobsReducer.jobs };
+};
+const mapDispatchToProps = { addJob };
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(JobsForm)
+);
