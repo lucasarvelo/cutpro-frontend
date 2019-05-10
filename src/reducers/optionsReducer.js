@@ -1,6 +1,6 @@
 const initialState = {
   bladeThickness: 0.125,
-  marginError: 0.25,
+  marginError: 4.0,
   materialTypes: ["Low Profile", "Casement", "Double Hung", "Fix Casement"]
 };
 
@@ -13,7 +13,7 @@ export default (state = initialState, { type, payload }) => {
     case "UPDATE_MATERIAL_TYPE":
       return {
         ...state,
-        materialTypes: [payload.materialTypes]
+        materialTypes: [...payload.materialTypes]
       };
     default:
       return state;
