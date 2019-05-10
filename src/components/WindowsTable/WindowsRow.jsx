@@ -12,26 +12,33 @@ class WindowsRow extends Component {
       width: props.window.width,
       height: props.window.height,
       quantity: props.window.quantity,
-      readOnly: true
+      readOnly: true,
+      isValid: true,
+      prevState: {
+        width: props.window.width,
+        height: props.window.height,
+        quantity: props.window.quantity
+      }
     };
   }
 
   toggleReadOnly = () => {
-    this.setState({ readOnly: !this.state.readOnly });
+    this.setState({
+      readOnly: !this.state.readOnly,
+      prevState: {
+        width: this.state.width,
+        height: this.state.height,
+        quantity: this.state.quantity
+      }
+    });
   };
 
   handleDelete = () => {
-    const prevState = {
-      width: this.state.width,
-      height: this.state.height,
-      quantity: this.state.quantity
-    };
-
     //Change behavior if editing row
     if (this.state.readOnly) {
       this.props.deleteWindow(this.state.jobNumber, this.state.index);
     } else {
-      this.setState(prevState);
+      this.setState(this.state.prevState);
       this.toggleReadOnly();
     }
   };
@@ -47,7 +54,7 @@ class WindowsRow extends Component {
 
   handleOnChange = event => {
     const id = event.target.id,
-      value = Number(event.target.value);
+      value = event.target.value;
     this.setState({ [id]: value });
   };
 
@@ -59,8 +66,7 @@ class WindowsRow extends Component {
         </th>
         <td className="align-middle">
           <input
-            type="number"
-            step="0.001"
+            type="text"
             className={
               this.state.readOnly ? "form-control readOnly" : "form-control"
             }
@@ -69,24 +75,31 @@ class WindowsRow extends Component {
             value={this.state.width}
             required
             readOnly={this.state.readOnly}
+            pattern="^\d*(\.\d{0,3})?$"
+            title="Width should contain a number up to three decimal places"
           />
         </td>
         <td className="align-middle">
           <input
-            type="number"
-            step="0.1"
-            className="form-control"
+            type="text"
+            className={
+              this.state.readOnly ? "form-control readOnly" : "form-control"
+            }
             id="height"
             onChange={this.handleOnChange}
             value={this.state.height}
             required
             readOnly={this.state.readOnly}
+            pattern="^\d*(\.\d{0,3})?$"
+            title="Height should contain a number up to three decimal places"
           />
         </td>
         <td className="align-middle">
           <input
             type="number"
-            className="form-control"
+            className={
+              this.state.readOnly ? "form-control readOnly" : "form-control"
+            }
             id="quantity"
             onChange={this.handleOnChange}
             value={this.state.quantity}
@@ -96,6 +109,7 @@ class WindowsRow extends Component {
         </td>
         <td className="align-middle">
           <button
+            type="button"
             className="btn btn-outline-primary btn-sm m-1"
             onClick={this.handleUpdate}
           >
@@ -104,6 +118,7 @@ class WindowsRow extends Component {
         </td>
         <td className="align-middle">
           <button
+            type="button"
             className="btn btn-outline-danger btn-sm m-1"
             onClick={this.handleDelete}
           >
