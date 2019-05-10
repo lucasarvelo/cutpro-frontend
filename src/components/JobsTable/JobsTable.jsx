@@ -4,6 +4,14 @@ import { deleteJob } from "../../actions/jobsActions";
 import { withRouter } from "react-router-dom";
 
 class JobsTable extends Component {
+  handleDelete = job => {
+    this.props.deleteJob(job);
+  };
+
+  handleEdit = job => {
+    this.props.history.push("/jobs/" + job.jobNumber);
+  };
+
   render() {
     return (
       <table className="table table-striped table-sm table-hover">
@@ -29,17 +37,13 @@ class JobsTable extends Component {
                 <td className="align-middle">
                   <button
                     className="btn btn-outline-primary btn-sm m-1"
-                    onClick={() => {
-                      this.props.history.push("/jobs/" + job.jobNumber);
-                    }}
+                    onClick={() => this.handleEdit(job)}
                   >
                     Edit
                   </button>
                   <button
                     className="btn btn-outline-danger btn-sm m-1"
-                    onClick={() => {
-                      this.props.deleteJob(job);
-                    }}
+                    onClick={() => this.handleDelete(job)}
                   >
                     Delete
                   </button>
