@@ -7,24 +7,24 @@ const initialState = {
       formChecked: true,
       windows: [
         {
-          width: 2.256,
-          height: 12.256,
-          quantity: "4"
+          width: 20.5,
+          height: 50,
+          quantity: 1
         },
         {
-          width: 2.256,
-          height: 12.256,
-          quantity: "4"
+          width: 45.25,
+          height: 25.313,
+          quantity: 2
         },
         {
-          width: 2.256,
-          height: 12.256,
-          quantity: "4"
+          width: 45.225,
+          height: 46.312,
+          quantity: 3
         },
         {
-          width: 2.256,
-          height: 12.256,
-          quantity: "4"
+          width: 23.5,
+          height: 62,
+          quantity: 4
         }
       ]
     },
@@ -104,9 +104,10 @@ export default (state = initialState, { type, payload }) => {
               )
             };
           }
-          return { ...job };
+          return job;
         })
       };
+
     case "FETCH_JOBS_BEGIN":
       return { ...state, loading: true };
     case "FETCH_JOBS_SUCCESS":
