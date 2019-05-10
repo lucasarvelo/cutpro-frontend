@@ -4,6 +4,20 @@ import WindowsRow from "./WindowsRow";
 
 class WindowsTable extends Component {
   render() {
+    const windows = this.props.jobs
+      .find(job => job.jobNumber === this.props.jobNumber)
+      .windows.map((window, index) => {
+        debugger;
+        return (
+          <WindowsRow
+            window={window}
+            index={index}
+            key={"window" + index}
+            jobNumber={this.props.jobNumber}
+          />
+        );
+      });
+
     return (
       <table className="table table-striped table-sm table-hover">
         <thead>
@@ -15,20 +29,7 @@ class WindowsTable extends Component {
             <th scope="col" colSpan="2" />
           </tr>
         </thead>
-        <tbody>
-          {this.props.jobs
-            .find(job => job.jobNumber === this.props.jobNumber)
-            .windows.map((window, index) => {
-              return (
-                <WindowsRow
-                  window={window}
-                  index={index}
-                  key={"window" + index}
-                  jobNumber={this.props.jobNumber}
-                />
-              );
-            })}
-        </tbody>
+        <tbody>{windows}</tbody>
       </table>
     );
   }
