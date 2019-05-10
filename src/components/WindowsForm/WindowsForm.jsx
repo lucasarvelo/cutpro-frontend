@@ -32,25 +32,27 @@ class WindowsForm extends Component {
         <div className="form-group">
           <label htmlFor="width">Width</label>
           <input
-            type="number"
+            type="text"
             className="form-control"
             id="width"
             onChange={this.handleOnChange}
             step=".001"
             required
             pattern="^\d*(\.\d{0,3})?$"
+            title="Width should contain a number up to three decimal places"
           />
         </div>
         <div className="form-group">
           <label htmlFor="height">Height</label>
           <input
-            type="number"
+            type="text"
             className="form-control"
             id="height"
             onChange={this.handleOnChange}
             step=".001"
             required
             pattern="^\d*(\.\d{0,3})?$"
+            title="Height should contain a number up to three decimal places"
           />
         </div>
         <div className="form-group">
@@ -64,7 +66,7 @@ class WindowsForm extends Component {
           />
         </div>
         <button type="submit" className="btn btn-primary">
-          Add Job
+          Add Window
         </button>
       </form>
     );
