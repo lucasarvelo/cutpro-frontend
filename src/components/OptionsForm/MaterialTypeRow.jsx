@@ -5,25 +5,36 @@ export class MaterialTypeRow extends Component {
     super(props);
 
     this.state = {
-      materialType: this.props.type,
-      index: this.props.index,
-      readOnly: true
+      materialType: props.type,
+      index: props.index,
+      readOnly: true,
+      prevState: {
+        materialType: props.type,
+        index: props.index
+      }
     };
   }
 
+  componentWillReceiveProps = nextProps => {
+    this.setState({ materialType: nextProps.type, index: nextProps.index });
+  };
+
   toggleReadOnly = () => {
-    this.setState({ readOnly: !this.state.readOnly });
+    this.setState({
+      readOnly: !this.state.readOnly,
+      prevState: {
+        materialType: this.state.materialType,
+        index: this.state.index
+      }
+    });
   };
 
   //Change behavior if editing row
   handleDelete = () => {
-    const prevState = {
-      materialType: this.state.materialType
-    };
     if (this.state.readOnly) {
       this.props.deleteMaterialType(this.state.index);
     } else {
-      this.setState(prevState);
+      this.setState(this.state.prevState);
       this.toggleReadOnly();
     }
   };

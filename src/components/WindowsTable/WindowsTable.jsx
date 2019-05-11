@@ -7,7 +7,6 @@ class WindowsTable extends Component {
     const windows = this.props.jobs
       .find(job => job.jobNumber === this.props.jobNumber)
       .windows.map((window, index) => {
-        debugger;
         return (
           <WindowsRow
             window={window}

@@ -22,6 +22,20 @@ class WindowsRow extends Component {
     };
   }
 
+  componentWillReceiveProps = nextProps => {
+    this.setState({
+      index: nextProps.index,
+      jobNumber: nextProps.jobNumber,
+      width: nextProps.window.width,
+      height: nextProps.window.height,
+      quantity: nextProps.window.quantity,
+      prevState: {
+        width: nextProps.window.width,
+        height: nextProps.window.height,
+        quantity: nextProps.window.quantity
+      }
+    });
+  };
   toggleReadOnly = () => {
     this.setState({
       readOnly: !this.state.readOnly,
@@ -33,7 +47,7 @@ class WindowsRow extends Component {
     });
   };
 
-  handleDelete = () => {
+  handleDelete = event => {
     //Change behavior if editing row
     if (this.state.readOnly) {
       this.props.deleteWindow(this.state.jobNumber, this.state.index);
@@ -54,7 +68,9 @@ class WindowsRow extends Component {
 
   handleOnChange = event => {
     const id = event.target.id,
-      value = event.target.value;
+      value = isNaN(event.target.value)
+        ? event.target.value
+        : Number(event.target.value);
     this.setState({ [id]: value });
   };
 
@@ -72,7 +88,11 @@ class WindowsRow extends Component {
             }
             id="width"
             onChange={this.handleOnChange}
-            value={this.state.width}
+            value={
+              isNaN(this.state.width) || !this.state.readOnly
+                ? this.state.width
+                : this.state.width.toFixed(3)
+            }
             required
             readOnly={this.state.readOnly}
             pattern="^\d*(\.\d{0,3})?$"
@@ -87,7 +107,11 @@ class WindowsRow extends Component {
             }
             id="height"
             onChange={this.handleOnChange}
-            value={this.state.height}
+            value={
+              isNaN(this.state.height) || !this.state.readOnly
+                ? this.state.height
+                : this.state.height.toFixed(3)
+            }
             required
             readOnly={this.state.readOnly}
             pattern="^\d*(\.\d{0,3})?$"
