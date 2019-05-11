@@ -12,12 +12,14 @@ class WindowsRow extends Component {
       width: props.window.width,
       height: props.window.height,
       quantity: props.window.quantity,
+      type: props.window.type,
       readOnly: true,
       isValid: true,
       prevState: {
         width: props.window.width,
         height: props.window.height,
-        quantity: props.window.quantity
+        quantity: props.window.quantity,
+        type: props.window.type
       }
     };
   }
@@ -29,10 +31,12 @@ class WindowsRow extends Component {
       width: nextProps.window.width,
       height: nextProps.window.height,
       quantity: nextProps.window.quantity,
+      type: nextProps.window.type,
       prevState: {
         width: nextProps.window.width,
         height: nextProps.window.height,
-        quantity: nextProps.window.quantity
+        quantity: nextProps.window.quantity,
+        type: nextProps.window.type
       }
     });
   };
@@ -42,7 +46,8 @@ class WindowsRow extends Component {
       prevState: {
         width: this.state.width,
         height: this.state.height,
-        quantity: this.state.quantity
+        quantity: this.state.quantity,
+        type: this.state.type
       }
     });
   };
@@ -75,6 +80,10 @@ class WindowsRow extends Component {
   };
 
   render() {
+    const windowTypes = this.props.materialTypes.map((materialType, index) => (
+      <option key={index}>{materialType}</option>
+    ));
+
     return (
       <tr>
         <th scope="row" className="align-middle">
@@ -132,6 +141,17 @@ class WindowsRow extends Component {
           />
         </td>
         <td className="align-middle">
+          <select
+            className="form-control select-width-auto"
+            id="type"
+            onChange={this.handleOnChange}
+            value={this.state.type}
+            disabled={this.state.readOnly}
+          >
+            {windowTypes}
+          </select>
+        </td>
+        <td className="align-middle">
           <button
             type="button"
             className="btn btn-outline-primary btn-sm m-1"
@@ -154,9 +174,10 @@ class WindowsRow extends Component {
   }
 }
 
+const mapStateToProps = state => state.optionsReducer;
 const mapDispatchToProps = { deleteWindow, updateWindow };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(WindowsRow);

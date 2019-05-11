@@ -25,6 +25,7 @@ class WindowsTable extends Component {
             <th scope="col">Width</th>
             <th scope="col">Height</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Window Type</th>
             <th scope="col" colSpan="2" />
           </tr>
         </thead>

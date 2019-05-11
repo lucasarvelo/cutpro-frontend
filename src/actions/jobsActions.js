@@ -54,7 +54,8 @@ export const updateWindow = state => dispatch => {
       window: {
         width: state.width,
         height: state.height,
-        quantity: state.quantity
+        quantity: state.quantity,
+        type: state.type
       }
     }
   });
