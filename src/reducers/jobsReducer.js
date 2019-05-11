@@ -3,42 +3,46 @@ const initialState = {
     {
       jobNumber: 123456,
       clientNumber: 123456,
-      clientName: "ddsd",
+      clientName: "Scott Tolisky",
       formChecked: true,
       windows: [
         {
           width: 20.5,
           height: 50,
-          quantity: 1
+          quantity: 1,
+          type: "Low Profile"
         },
         {
           width: 45.25,
           height: 25.313,
-          quantity: 2
+          quantity: 2,
+          type: "Fix Casement"
         },
         {
           width: 45.225,
           height: 46.312,
-          quantity: 3
+          quantity: 3,
+          type: "Casement"
         },
         {
           width: 23.5,
           height: 62,
-          quantity: 4
+          quantity: 4,
+          type: "Double Hung"
         }
       ]
     },
     {
       jobNumber: 1234,
       clientNumber: 1234,
-      clientName: "hello",
+      clientName: "Web Boss",
       formChecked: true,
       windows: []
     },
     {
       jobNumber: 4567895,
       clientNumber: 4568754,
-      clientName: "Paco",
+      clientName: "Lucas Arvelo",
       formChecked: true,
       windows: []
     }
