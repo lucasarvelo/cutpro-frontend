@@ -40,6 +40,7 @@ class WindowsRow extends Component {
       }
     });
   };
+
   toggleReadOnly = () => {
     this.setState({
       readOnly: !this.state.readOnly,
@@ -50,6 +51,19 @@ class WindowsRow extends Component {
         type: this.state.type
       }
     });
+  };
+
+  isValid = () => {
+    const width = this.refs.width,
+      height = this.refs.height;
+
+    if (height.checkValidity() && width.checkValidity()) {
+      return true;
+    } else {
+      height.reportValidity();
+      width.reportValidity();
+      return false;
+    }
   };
 
   handleDelete = event => {
@@ -66,22 +80,23 @@ class WindowsRow extends Component {
     if (this.state.readOnly) {
       this.toggleReadOnly();
     } else {
-      this.props.updateWindow(this.state);
-      this.toggleReadOnly();
+      if (this.isValid()) {
+        this.props.updateWindow(this.state);
+        this.toggleReadOnly();
+      }
     }
   };
 
   handleOnChange = event => {
     const id = event.target.id,
-      value = isNaN(event.target.value)
-        ? event.target.value
-        : Number(event.target.value);
+      value = event.target.value;
+    event.target.reportValidity();
     this.setState({ [id]: value });
   };
 
   render() {
     const windowTypes = this.props.materialTypes.map((materialType, index) => (
-      <option key={index}>{materialType}</option>
+      <option key={index}>{materialType.name}</option>
     ));
 
     return (
@@ -96,6 +111,7 @@ class WindowsRow extends Component {
               this.state.readOnly ? "form-control readOnly" : "form-control"
             }
             id="width"
+            ref="width"
             onChange={this.handleOnChange}
             value={
               isNaN(this.state.width) || !this.state.readOnly
@@ -115,6 +131,7 @@ class WindowsRow extends Component {
               this.state.readOnly ? "form-control readOnly" : "form-control"
             }
             id="height"
+            ref="height"
             onChange={this.handleOnChange}
             value={
               isNaN(this.state.height) || !this.state.readOnly
