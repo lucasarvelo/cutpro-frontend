@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addWindow } from "../../actions/jobsActions";
 
-const mapDispatchToProps = { addWindow };
-
 class WindowsForm extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +9,8 @@ class WindowsForm extends Component {
     this.state = {
       width: 0,
       height: 0,
-      quantity: 0
+      quantity: 0,
+      type: props.materialTypes[2].name
     };
   }
 
@@ -22,11 +21,17 @@ class WindowsForm extends Component {
 
   handleOnChange = event => {
     const id = event.target.id,
-      value = Number(event.target.value);
+      value = isNaN(event.target.value)
+        ? event.target.value
+        : Number(event.target.value);
     this.setState({ [id]: value });
   };
 
   render() {
+    const windowTypes = this.props.materialTypes.map((materialType, index) => (
+      <option key={index}>{materialType.name}</option>
+    ));
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -36,7 +41,6 @@ class WindowsForm extends Component {
             className="form-control"
             id="width"
             onChange={this.handleOnChange}
-            step=".001"
             required
             pattern="^\d*(\.\d{0,3})?$"
             title="Width should contain a number up to three decimal places"
@@ -49,7 +53,6 @@ class WindowsForm extends Component {
             className="form-control"
             id="height"
             onChange={this.handleOnChange}
-            step=".001"
             required
             pattern="^\d*(\.\d{0,3})?$"
             title="Height should contain a number up to three decimal places"
@@ -65,6 +68,17 @@ class WindowsForm extends Component {
             required
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="type">Window Type</label>
+          <select
+            className="form-control"
+            id="type"
+            onChange={this.handleOnChange}
+            value={this.state.type}
+          >
+            {windowTypes}
+          </select>
+        </div>
         <button type="submit" className="btn btn-primary">
           Add Window
         </button>
@@ -73,7 +87,10 @@ class WindowsForm extends Component {
   }
 }
 
+const mapStateToProps = state => state.optionsReducer;
+const mapDispatchToProps = { addWindow };
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(WindowsForm);
