@@ -10,7 +10,7 @@ class WindowsForm extends Component {
       width: 0,
       height: 0,
       quantity: 0,
-      type: props.materialTypes[2]
+      type: props.materialTypes[2].name
     };
   }
 
@@ -29,8 +29,9 @@ class WindowsForm extends Component {
 
   render() {
     const windowTypes = this.props.materialTypes.map((materialType, index) => (
-      <option key={index}>{materialType}</option>
+      <option key={index}>{materialType.name}</option>
     ));
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -40,7 +41,6 @@ class WindowsForm extends Component {
             className="form-control"
             id="width"
             onChange={this.handleOnChange}
-            step=".001"
             required
             pattern="^\d*(\.\d{0,3})?$"
             title="Width should contain a number up to three decimal places"
@@ -53,7 +53,6 @@ class WindowsForm extends Component {
             className="form-control"
             id="height"
             onChange={this.handleOnChange}
-            step=".001"
             required
             pattern="^\d*(\.\d{0,3})?$"
             title="Height should contain a number up to three decimal places"
