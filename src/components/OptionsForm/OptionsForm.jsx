@@ -113,6 +113,9 @@ export class OptionsForm extends Component {
                 <th scope="col" className="align-middle">
                   Type
                 </th>
+                <th scope="col" className="align-middle">
+                  Length
+                </th>
                 <th scope="col" colSpan="2" className="align-middle">
                   <button
                     type="button"
@@ -127,7 +130,8 @@ export class OptionsForm extends Component {
             <tbody>
               {this.state.materialTypes.map((type, index) => (
                 <MaterialTypeRow
-                  type={type}
+                  type={type.name}
+                  materialLength={type.materialLength}
                   index={index}
                   key={index}
                   deleteMaterialType={this.deleteMaterialType}
