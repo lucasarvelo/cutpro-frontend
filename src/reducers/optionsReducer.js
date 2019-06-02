@@ -1,7 +1,12 @@
 const initialState = {
   bladeThickness: 0.125,
   marginError: 4.0,
-  materialTypes: ["Low Profile", "Casement", "Double Hung", "Fix Casement"]
+  materialTypes: [
+    { name: "Low Profile", materialLength: 190 },
+    { name: "Casement", materialLength: 195 },
+    { name: "Double Hung", materialLength: 185 },
+    { name: "Fix Casement", materialLength: 190 }
+  ]
 };
 
 export default (state = initialState, { type, payload }) => {
