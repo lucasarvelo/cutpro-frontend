@@ -52,8 +52,8 @@ export const updateWindow = state => dispatch => {
       jobNumber: state.jobNumber,
       windowIndex: state.index,
       window: {
-        width: state.width,
-        height: state.height,
+        width: Number(state.width),
+        height: Number(state.height),
         quantity: state.quantity,
         type: state.type
       }
