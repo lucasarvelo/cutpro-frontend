@@ -8,10 +8,10 @@ class Window {
     this.windowType = windowType;
     this.jobNumber = jobNumber;
     this.parts = [
-      new Part(this.jobNumber, 1, this.width, "Head"),
-      new Part(this.jobNumber, 2, this.width, "Sill"),
-      new Part(this.jobNumber, 3, this.height, "Jamb"),
-      new Part(this.jobNumber, 4, this.height, "Jamb")
+      new Part(this.jobNumber, windowNumber, this.width, "Head"),
+      new Part(this.jobNumber, windowNumber, this.width, "Sill"),
+      new Part(this.jobNumber, windowNumber, this.height, "Jamb"),
+      new Part(this.jobNumber, windowNumber, this.height, "Jamb")
     ];
   }
 }
