@@ -397,7 +397,35 @@ export default (state = initialState, { type, payload }) => {
         )
       };
     case "CUT_PART":
-      return { ...state };
+      return {
+        ...state,
+        cuttingLists: state.cuttingLists.map(list =>
+          list.poNumber !== payload.poNumber
+            ? list
+            : {
+                ...list,
+                cuttingList: list.cuttingList.map((list, index) =>
+                  index !== payload.listIndex
+                    ? list
+                    : {
+                        ...list,
+                        materials: list.materials.map((material, index) =>
+                          index !== payload.materialIndex
+                            ? material
+                            : {
+                                ...material,
+                                parts: material.parts.map((part, index) =>
+                                  index !== payload.partIndex
+                                    ? part
+                                    : { ...part, isCut: !part.isCut }
+                                )
+                              }
+                        )
+                      }
+                )
+              }
+        )
+      };
     default:
       return state;
   }

@@ -29,9 +29,9 @@ export const removeCuttingList = poNumber => dispatch => {
   });
 };
 
-export const cutPart = part => dispatch => {
+export const cutPart = payload => dispatch => {
   dispatch({
     type: "CUT_PART",
-    payload: part
+    payload: payload
   });
 };
