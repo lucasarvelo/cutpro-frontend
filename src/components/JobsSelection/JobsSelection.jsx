@@ -75,7 +75,7 @@ export class JobsSelection extends Component {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Job Number</th>
+              <th scope="col">Job #</th>
               <th scope="col">Client #</th>
               <th scope="col">Client Name</th>
               <th scope="col">Total Windows</th>
