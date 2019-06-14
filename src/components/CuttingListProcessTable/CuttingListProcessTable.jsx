@@ -1,13 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { cutPart } from "../../actions/cutListActions";
 import List from "./List";
 
 export class CuttingList extends Component {
+  cutPart = (listIndex, materialIndex, partIndex) => {
+    const payload = {
+      poNumber: this.props.poNumber,
+      listIndex: listIndex,
+      materialIndex: materialIndex,
+      partIndex: partIndex
+    };
+    this.props.cutPart(payload);
+  };
+
   render() {
     const parts = this.props.cuttingLists
       .find(cuttingList => cuttingList.poNumber === this.props.poNumber)
       .cuttingList.map((list, index) => {
-        return <List key={"list-" + index} list={list} index={index} />;
+        return (
+          <List
+            key={"list-" + index}
+            list={list}
+            index={index}
+            cutPart={this.cutPart}
+          />
+        );
       });
     return (
       <table className="table table-hover table-sm table-striped">
@@ -28,4 +46,11 @@ export class CuttingList extends Component {
 
 const mapStateToProps = state => state.cuttingListReducer;
 
-export default connect(mapStateToProps)(CuttingList);
+const mapDispatchToProps = {
+  cutPart
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CuttingList);

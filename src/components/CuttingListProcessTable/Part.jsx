@@ -13,12 +13,17 @@ export class Part extends Component {
     };
   }
 
+  componentWillReceiveProps = nextProps => {
+    this.setState({
+      isCut: nextProps.isCut
+    });
+  };
+
   handleCut = () => {
-    this.setState({ isCut: !this.state.isCut });
+    this.props.cutPart(this.state.index);
   };
 
   render() {
-    console.log(this.props);
     return (
       <tr
         onClick={this.handleCut}

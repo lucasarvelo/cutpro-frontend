@@ -16,7 +16,6 @@ export class Material extends Component {
 
   render() {
     const parts = this.props.material.parts.map((part, index) => {
-      console.log(part);
       return (
         <Part
           key={"part" + index}
@@ -25,9 +24,11 @@ export class Material extends Component {
           partLength={part.partLength}
           partType={part.type}
           isCut={part.isCut}
+          cutPart={partIndex => this.props.cutPart(this.props.index, partIndex)}
         />
       );
     });
+
     return (
       <React.Fragment>
         <tr onClick={this.toggleList}>

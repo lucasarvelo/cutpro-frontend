@@ -17,7 +17,14 @@ export class List extends Component {
   render() {
     const materials = this.props.list.materials.map((material, index) => {
       return (
-        <Material key={"material-" + index} material={material} index={index} />
+        <Material
+          key={"material-" + index}
+          material={material}
+          index={index}
+          cutPart={(materialIndex, partIndex) =>
+            this.props.cutPart(index, materialIndex, partIndex)
+          }
+        />
       );
     });
 
