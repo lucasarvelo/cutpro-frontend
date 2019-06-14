@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { removeCuttingList } from "../../actions/cutListActions";
 
 export class CuttingListTable extends Component {
-  handleDelete = cuttingList => {};
+  handleDelete = poNumber => {
+    this.props.removeCuttingList(poNumber);
+  };
 
   handleProcess = poNumber => {
     this.props.history.push("/cuttinglist/" + poNumber);
@@ -27,7 +30,7 @@ export class CuttingListTable extends Component {
             </button>
             <button
               className="btn btn-outline-danger btn-sm m-1"
-              onClick={() => this.handleDelete(cuttingList)}
+              onClick={() => this.handleDelete(cuttingList.poNumber)}
             >
               Delete
             </button>
@@ -56,7 +59,7 @@ export class CuttingListTable extends Component {
 
 const mapStateToProps = state => state.cuttingListReducer;
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { removeCuttingList };
 
 export default withRouter(
   connect(
