@@ -25,6 +25,13 @@ export const addCuttingList = data => dispatch => {
 export const removeCuttingList = poNumber => dispatch => {
   dispatch({
     type: "REMOVE_CUTTING_LIST",
-    payload: { poNumber: poNumber }
+    payload: { poNumber: Number(poNumber) }
+  });
+};
+
+export const cutPart = part => dispatch => {
+  dispatch({
+    type: "CUT_PART",
+    payload: part
   });
 };
