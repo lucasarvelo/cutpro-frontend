@@ -5,10 +5,10 @@ const CuttingList = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-6">
+        <div className="col-lg-6 p-2">
           <JobsSelection />
         </div>
-        <div className="col-6">
+        <div className="col-lg-6 p-2">
           <CuttingListTable />
         </div>
       </div>

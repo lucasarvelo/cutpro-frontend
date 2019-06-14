@@ -8,6 +8,7 @@ import About from "./views/About";
 import JobEdit from "./views/JobEdit";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
+import CuttingListProcess from "./views/CuttingListProcess";
 
 class App extends Component {
   render() {
@@ -15,13 +16,14 @@ class App extends Component {
       <Router>
         <div className="App">
           <NavBar />
-          <div className="container">
+          <div className="container-fluid">
             <Route exact path="/" component={Dashboard} />
             <Route exact path="/jobs" component={Jobs} />
             <Route exact path="/cuttinglist" component={CuttingList} />
             <Route exact path="/options" component={Options} />
             <Route exact path="/about" component={About} />
             <Route path="/jobs/:id" component={JobEdit} />
+            <Route path="/cuttinglist/:id" component={CuttingListProcess} />
           </div>
         </div>
       </Router>
