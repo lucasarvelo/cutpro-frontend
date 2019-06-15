@@ -397,6 +397,7 @@ export default (state = initialState, { type, payload }) => {
         )
       };
     case "CUT_PART":
+      console.log(payload);
       return {
         ...state,
         cuttingLists: state.cuttingLists.map(list =>

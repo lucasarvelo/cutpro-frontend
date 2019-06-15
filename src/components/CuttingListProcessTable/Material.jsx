@@ -24,7 +24,7 @@ export class Material extends Component {
           partLength={part.partLength}
           partType={part.type}
           isCut={part.isCut}
-          cutPart={partIndex => this.props.cutPart(this.props.index, partIndex)}
+          cutPart={() => this.props.cutPart(index)}
         />
       );
     });

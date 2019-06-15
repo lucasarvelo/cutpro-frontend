@@ -21,8 +21,8 @@ export class List extends Component {
           key={"material-" + index}
           material={material}
           index={index}
-          cutPart={(materialIndex, partIndex) =>
-            this.props.cutPart(index, materialIndex, partIndex)
+          cutPart={partIndex =>
+            this.props.cutPart(this.props.index, index, partIndex)
           }
         />
       );
