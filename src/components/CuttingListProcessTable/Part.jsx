@@ -20,7 +20,7 @@ export class Part extends Component {
   };
 
   handleCut = () => {
-    this.props.cutPart(this.state.index);
+    this.props.cutPart();
   };
 
   render() {
