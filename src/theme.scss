@@ -2,3 +2,22 @@
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
+
+//Class to remove hover style from tables headers and cell background on encapsulated hoverable tables.
+
+.table-hover {
+  & thead {
+    & tr.remove-hover {
+      &:hover {
+        color: $table-color;
+        background-color: $table-bg;
+      }
+    }
+  }
+  & tbody {
+    & tr.remove-hover {
+      color: $table-color;
+      background-color: #ffffff;
+    }
+  }
+}
