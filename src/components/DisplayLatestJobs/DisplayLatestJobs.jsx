@@ -1,13 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteJob } from '../../actions/jobsActions';
 import { withRouter } from 'react-router-dom';
 
 const DisplayLatestJobs = props => {
-  const handleDelete = job => {
-    props.deleteJob(job);
-  };
-
   const handleEdit = job => {
     props.history.push('/jobs/' + job.jobNumber);
   };
@@ -27,12 +22,6 @@ const DisplayLatestJobs = props => {
             onClick={() => handleEdit(job)}
           >
             Edit
-          </button>
-          <button
-            className="btn btn-outline-danger btn-sm m-1"
-            onClick={() => handleDelete(job)}
-          >
-            Delete
           </button>
         </td>
       </tr>
@@ -57,13 +46,4 @@ const DisplayLatestJobs = props => {
 
 const mapStateToProps = state => state.jobsReducer;
 
-const mapDispatchToProps = {
-  deleteJob,
-};
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(DisplayLatestJobs)
-);
+export default withRouter(connect(mapStateToProps)(DisplayLatestJobs));
