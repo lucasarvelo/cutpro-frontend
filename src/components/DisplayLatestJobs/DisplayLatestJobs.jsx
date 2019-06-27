@@ -32,7 +32,17 @@ const DisplayLatestJobs = props => {
             <th scope="col">Client Name</th>
           </tr>
         </thead>
-        <tbody>{latestThreeJobs}</tbody>
+        <tbody>
+          {latestThreeJobs.length > 0 ? (
+            latestThreeJobs
+          ) : (
+            <tr>
+              <th colSpan="4">
+                <h5>No Jobs Available</h5>
+              </th>
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>
   );
