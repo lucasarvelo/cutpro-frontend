@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const DisplayLatestCuttingLists = props => {
@@ -51,4 +52,4 @@ const DisplayLatestCuttingLists = props => {
 
 const mapStateToProps = state => state.cuttingListReducer;
 
-export default connect(mapStateToProps)(DisplayLatestCuttingLists);
+export default withRouter(connect(mapStateToProps)(DisplayLatestCuttingLists));
