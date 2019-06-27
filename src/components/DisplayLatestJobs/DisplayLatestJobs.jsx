@@ -9,28 +9,20 @@ const DisplayLatestJobs = props => {
 
   const latestThreeJobs = props.jobs.slice(0, 3).map((job, index) => {
     return (
-      <tr key={'job' + index}>
+      <tr key={'job' + index} onClick={() => handleEdit(job)}>
         <th scope="row" className="align-middle">
           {index + 1}
         </th>
         <td className="align-middle">{job.jobNumber}</td>
         <td className="align-middle">{job.clientNumber}</td>
         <td className="align-middle">{job.clientName}</td>
-        <td className="align-middle">
-          <button
-            className="btn btn-outline-primary btn-sm m-1"
-            onClick={() => handleEdit(job)}
-          >
-            Edit
-          </button>
-        </td>
       </tr>
     );
   });
 
   return (
     <div className="card">
-      <table className="table table-striped">
+      <table className="table table-striped table-hover">
         <thead>
           <tr>
             <th colSpan="5">
