@@ -22,12 +22,14 @@ const DisplayLatestJobs = props => {
 
   return (
     <div className="card">
+      <h1>Latest Jobs</h1>
       <table className="table table-striped table-hover">
         <thead>
           <tr>
-            <th colSpan="5">
-              <h1>Latest Jobs</h1>
-            </th>
+            <th scope="col">#</th>
+            <th scope="col">Jobs Number</th>
+            <th scope="col">Client Number</th>
+            <th scope="col">Client Name</th>
           </tr>
         </thead>
         <tbody>{latestThreeJobs}</tbody>
