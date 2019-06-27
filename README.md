@@ -6,6 +6,10 @@ You can see a live version of the master branch deployed in Netlify [Here](https
 
 In the project directory, you can run:
 
+### `npm install`
+
+Install all modules listed as dependencies in package.json in the local node_modules folder.
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
