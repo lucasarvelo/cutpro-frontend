@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { deleteJob } from '../../actions/jobsActions';
 import { withRouter } from 'react-router-dom';
 
-const DisplayLastestJobs = props => {
+const DisplayLatestJobs = props => {
   const handleDelete = job => {
     props.deleteJob(job);
   };
@@ -65,5 +65,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(DisplayLastestJobs)
+  )(DisplayLatestJobs)
 );
